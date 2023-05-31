@@ -2,12 +2,10 @@ package ru.kata.spring.boot_security.demo.models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.validator.constraints.Normalized;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.util.*;
 
 @Entity
@@ -20,26 +18,18 @@ public class User implements UserDetails {
     private long id;
 
     @Column(name = "username")
-//    @NotBlank(message = "FirstName should not be empty")
-//    @Size(min = 1, max = 30, message = "FirstName should be from 1 to 30 characters")
     private String username;
 
     @Column(name = "lastName")
-//    @NotBlank(message = "LastName should not be empty")
-//    @Size(min = 1, max = 30, message = "LastName should be from 1 to 30 characters")
     private String lastName;
 
     @Column(name = "age")
-//    @Min(value = 0, message = "User's Age should be more than 0!")
     private int age;
 
     @Column(name = "email")
-//    @Email
-//    @NotBlank
     private String email;
 
     @Column(name = "password")
-//    @NotBlank(message = "Password should not be empty")
     private String password;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
@@ -48,7 +38,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
 
-private List<Role> roles = new ArrayList<>(){
+    private Set<Role> roles = new HashSet<>() {
         {
             add(new Role());
         }
@@ -57,7 +47,7 @@ private List<Role> roles = new ArrayList<>(){
     public User() {
     }
 
-    public User(String username, String lastName, int age, String email, String password, List <Role> roles) {
+    public User(String username, String lastName, int age, String email, String password, Set<Role> roles) {
         this.username = username;
         this.lastName = lastName;
         this.age = age;
@@ -107,11 +97,11 @@ private List<Role> roles = new ArrayList<>(){
         this.email = email;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

@@ -179,7 +179,7 @@
                                                                         id="rolesEdit" th:size="${#sets.size(allRoles)}"
                                                                         required>
                                                                     <option th:each="role : ${allRoles}"
-                                                                            th:value="${role.id}"
+                                                                            th:value="${role.role}"
                                                                             th:text="${role.toString()}"
                                                                             th:selected="${#lists.contains(user.roles, role)}"></option>
                                                                 </select>
@@ -281,8 +281,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     </tbody>
                                 </table>
                             </div>
@@ -329,13 +327,13 @@
                                                        id="passwordNew" placeholder="Password" required/>
                                             </div>
                                             <div class="form-group">
-                                                <label for="rolesNew" >Role</label>
+                                                <label for="rolesNew">Role</label>
                                                 <select name="roles[]" multiple
                                                         class="custom-select"
                                                         id="rolesNew" th:size="${#sets.size(allRoles)}"
                                                         required>
                                                     <option th:each="role : ${allRoles}"
-                                                            th:value="${role.id}"
+                                                            th:value="${role.role}"
                                                             th:text="${role.toString()}"
                                                             th:selected="${#lists.contains(user.roles, role)}"></option>
                                                 </select>
@@ -347,10 +345,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
             <div class="tab-pane " id="userHome" role="tabpanel" aria-labelledby="userHome-tab">
                 <h1>User information-page</h1>
@@ -388,10 +383,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
-
     </div>
 </div>
 
